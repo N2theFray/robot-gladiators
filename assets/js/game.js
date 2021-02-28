@@ -13,7 +13,7 @@ console.log(enemyNames[0]);
 console.log(enemyNames[3]);
 
 //function to generate random numeric value
-var randomNumber = function (){
+var randomNumber = function (min, max){
   var value = Math.floor (Math.random()* (max - min +1)+ min);
 
   return value;
@@ -40,6 +40,8 @@ var fight = function(enemyName) {
       }
     }
 
+    
+
     // remove enemy's health by subtracting the amount set in the playerAttack variable
     var damage = randomNumber(playerAttack -3, playerAttack)
     enemyHealth = Math.max(0, enemyHealth - damage);
@@ -59,7 +61,7 @@ var fight = function(enemyName) {
     } else {
       window.alert(enemyName + ' still has ' + enemyHealth + ' health left.');
     }
-
+    
     // remove players's health by subtracting the amount set in the enemyAttack variable
     var damage = randomNumber(enemyAttack -3, enemyAttack)
     playerHealth = Math.max(0, playerHealth - damage);
