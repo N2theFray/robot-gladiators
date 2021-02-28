@@ -88,6 +88,54 @@ var endGame = function(){
   }
 };
 
+//create shop
+var shop = function (){
+  //ask the player what they'd like to do 
+  var shopOptionPrompt = window.prompt(
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store?"
+  );
+
+  // use switch to check against valid cases
+  switch (shopOptionPrompt){
+    case "refill":
+      if (playerMoney >= 7){
+      window.alert ("Refilling player's health by 20 for 7 dollars.");
+
+      //increase health and decrease money
+      playerHealth = playerHealth + 20;
+      playerMoney = playerMoney -7;
+      } else {
+        window.alert("You don't have enough money");
+      }
+      break;
+    
+    case "upgrade":
+      if (playerMoney >= 7){
+      window.alert("Upgrade players attack by 6 for 7 dollars");
+
+      //increase attack and decrease money
+      playerAttack = playerAttack + 6;
+      playerMoney = playerMoney - 7;
+    } else {
+      window.alert("You don't have enough money");
+    }
+      break;
+
+    case "leave":
+      window.alert ("Leaving the store");
+
+      // do nothing because they decided to leave
+      break;
+
+    default:
+      window.alert("You chose invalid option, please make valid selection");
+
+      //call shop again to make them pick valid choice
+      shop ();
+      break;
+  }
+};
+
 //function to start the game
 var startGame = function (){
   // reset player status
@@ -114,7 +162,17 @@ var startGame = function (){
 
       // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
       fight(pickedEnemyName);
+      // if we're not at the last enemy in the array and check to see if they're alive
+      if(i < enemyNames.length -1 && playerHealth > 0){
+        var storeConfirm = window.confirm("The fight is over, would you like to visit the shop?");
+
+        // if yes take player to shop
+        if (storeConfirm){
+        shop();
+        }
+      }
     }
+      
     // if player isn't alive, stop the game
     else {
       window.alert('You have lost your robot in battle! Game Over!');
